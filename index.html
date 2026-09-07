@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CRICKET CHAMPIONS — Team Selection</title>
+<style>
+:root{--bg:#f5f5f2;--card:#fff;--text:#171717;--muted:#707070;--line:#e3e3df;--accent:#171717}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+.wrap{max-width:1050px;margin:auto;padding:22px}
+.hero{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px;margin-bottom:16px}
+.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.eyebrow{font-size:12px;letter-spacing:.14em;color:var(--muted);font-weight:800}.title{font-size:32px;font-weight:850;margin:5px 0}.details{color:var(--muted);font-size:14px}
+.actions{display:flex;flex-wrap:wrap;gap:8px}.btn{border:1px solid #d9d9d5;background:#fff;border-radius:11px;padding:10px 13px;font-weight:750;cursor:pointer}.btn.dark{background:#171717;color:#fff;border-color:#171717}.btn:disabled{opacity:.45;cursor:not-allowed}
+.notice{margin-top:15px;padding:11px 13px;border-radius:11px;background:#f3f3f0;font-size:13px;color:#555}.locked{background:#ededeb;color:#222;font-weight:700}
+.teams{display:grid;grid-template-columns:1fr 1fr;gap:14px}.team{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}.teamhead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.teamname{font-size:20px;font-weight:850}.captain{font-size:13px;color:var(--muted);margin-top:3px}.count{font-size:12px;padding:6px 9px;border:1px solid var(--line);border-radius:99px;white-space:nowrap}
+.list{margin-top:12px}.player{display:flex;align-items:center;gap:11px;border:1px solid #e8e8e4;border-radius:12px;padding:9px 10px;margin:7px 0;background:#fcfcfa}.avatar{width:40px;height:40px;min-width:40px;border-radius:50%;background:#ecece8;display:grid;place-items:center;font-weight:850}.info{min-width:0;flex:1}.name{font-weight:720;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.role{font-size:11px;color:var(--muted);margin-top:2px}.crown{font-size:16px}.switch{display:flex;gap:5px}.switch button{font-size:11px;padding:8px 9px}
+.all{margin-top:16px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px}.all h2{margin:0 0 10px;font-size:18px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.empty{color:#999;padding:10px 0;font-size:13px}.admin{margin-top:16px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px}.admin h2{margin:0 0 5px;font-size:18px}.admin p{margin:0 0 12px;color:var(--muted);font-size:13px}.adminrow{display:flex;flex-wrap:wrap;gap:8px}.foot{font-size:12px;color:#888;margin-top:14px}
+@media(max-width:700px){.wrap{padding:12px}.top{flex-direction:column}.title{font-size:26px}.teams,.grid{grid-template-columns:1fr}.actions{width:100%}.actions .btn{flex:1}}
+@media print{body{background:#fff}.wrap{max-width:none;padding:0}.hero,.admin,.all{display:none}.teams{grid-template-columns:1fr 1fr;gap:18px}.team{border:2px solid #222;border-radius:10px}.player{break-inside:avoid}.notice{display:none}.print-title{display:block!important}.teams:before{content:"CRICKET CHAMPIONS • 12 SEPTEMBER 2026 • 8:00 AM • TIYALA, HAPUR";position:absolute;top:-36px;left:0;font-size:15px;font-weight:800}.teams{margin-top:45px}}
+.print-title{display:none}
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+<section class="hero">
+<div class="top">
+<div><div class="eyebrow">CRICKET TOURNAMENT</div><div class="title">CRICKET CHAMPIONS</div><div class="details">12 September 2026 • Saturday • 8:00 AM • Tiyala, Hapur</div></div>
+<div class="actions"><button class="btn" id="print">🖨 Print Team Sheet</button><button class="btn dark" id="adminBtn">🔐 Admin</button></div>
+</div>
+<div class="notice" id="notice">Team selection is open. Select your team using A or B.</div>
+</section>
+
+<div class="print-title">CRICKET CHAMPIONS</div>
+
+<section class="teams">
+<div class="team"><div class="teamhead"><div><div class="teamname">🏆 Abdur's Champions</div><div class="captain">👑 Captain: Abdurrahman Arif</div></div><div class="count" id="acount">1 player</div></div><div class="list" id="a"></div></div>
+<div class="team"><div class="teamhead"><div><div class="teamname">🏆 Nazim's Champions</div><div class="captain">👑 Captain: Nazim Ali</div></div><div class="count" id="bcount">1 player</div></div><div class="list" id="b"></div></div>
+</section>
+
+<section class="all">
+<h2>All Players</h2><div id="players" class="grid"></div>
+<div class="foot">Players can move between teams while selection is unlocked. Captains are fixed.</div>
+</section>
+
+<section class="admin" id="adminPanel" hidden>
+<h2>Admin Control</h2><p>Admin mode controls whether team changes are allowed.</p>
+<div class="adminrow">
+<button class="btn dark" id="lock">🔒 Lock Teams</button>
+<button class="btn" id="unlock">🔓 Unlock Teams</button>
+<button class="btn" id="reset">↩ Reset Selection</button>
+</div>
+<div class="foot">Demo security: the admin PIN is stored in this page. For a real public event, use the realtime database version described in SETUP.txt.</div>
+</section>
+</div>
+<script>
+const PLAYERS=["Sajid Khalil","Abdul Haq","Imran Khan","Abdul Sattar","Abdurrahman Arif","Mohd. Tayyab","Ashraf Ali Bastavi","Shahzad Ali","Khalid Abdullah","Abdullah Ahsan","Ashraf Husaini","Mohd Muslim","Athar Ali","Nazim Ali","Musab Rafiq","Riyaz","Anwar Ahmad","Rashid Khalil","Md. Hassan (Kaku)","Javed Chaudhary","Arman","Roshan Ali","Jamali Bhai"];
+const FIXED={"Abdurrahman Arif":"A","Nazim Ali":"B"};
+const ADMIN_PIN="1234"; // Change this before publishing if desired.
+let teams={...FIXED}; let locked=false; let admin=false;
+try{teams={...FIXED,...(JSON.parse(localStorage.getItem("ccTeams"))||{})};locked=localStorage.getItem("ccLocked")==="1"}catch(e){}
+Object.assign(teams,FIXED);
+
+function initials(n){return n.split(/\s+/).filter(Boolean).map(x=>x[0]).slice(0,2).join("").toUpperCase()}
+function save(){localStorage.setItem("ccTeams",JSON.stringify(teams));localStorage.setItem("ccLocked",locked?"1":"0")}
+function playerCard(n,team){
+ const fixed=Object.prototype.hasOwnProperty.call(FIXED,n);
+ const el=document.createElement("div");el.className="player";
+ el.innerHTML=`<div class="avatar">${initials(n)}</div><div class="info"><div class="name">${n}</div><div class="role">${fixed?"Captain":team?("Team "+team):"Not selected"}</div></div>${fixed?'<div class="crown">👑</div>':""}`;
+ if(!fixed && !locked){
+  const s=document.createElement("div");s.className="switch";
+  ["A","B"].forEach(t=>{let b=document.createElement("button");b.className="btn";b.textContent=t;b.title=t==="A"?"Join Abdur's Champions":"Join Nazim's Champions";b.onclick=()=>{teams[n]=t;save();render()};s.appendChild(b)});
+  el.appendChild(s);
+ }
+ return el;
+}
+function render(){
+ const a=document.getElementById("a"),b=document.getElementById("b"),p=document.getElementById("players");
+ [a,b,p].forEach(x=>x.innerHTML="");
+ PLAYERS.forEach(n=>{
+   const t=teams[n];
+   if(t==="A")a.appendChild(playerCard(n,t));
+   else if(t==="B")b.appendChild(playerCard(n,t));
+   else p.appendChild(playerCard(n,null));
+ });
+ if(!a.children.length)a.innerHTML='<div class="empty">No players selected</div>';
+ if(!b.children.length)b.innerHTML='<div class="empty">No players selected</div>';
+ const ac=Object.values(teams).filter(x=>x==="A").length,bc=Object.values(teams).filter(x=>x==="B").length,un=PLAYERS.filter(n=>!teams[n]).length;
+ document.getElementById("acount").textContent=ac+" "+(ac===1?"player":"players");
+ document.getElementById("bcount").textContent=bc+" "+(bc===1?"player":"players");
+ const notice=document.getElementById("notice");
+ notice.textContent=locked?"🔒 Teams are LOCKED. No player can change teams.":"Team selection is OPEN. Select your team using A or B.";
+ notice.className="notice"+(locked?" locked":"");
+ document.getElementById("lock").disabled=locked;document.getElementById("unlock").disabled=!locked;
+ document.getElementById("status");
+}
+document.getElementById("print").onclick=()=>window.print();
+document.getElementById("adminBtn").onclick=()=>{
+ if(admin){document.getElementById("adminPanel").hidden=true;admin=false;return}
+ const pin=prompt("Enter Admin PIN:");
+ if(pin===ADMIN_PIN){admin=true;document.getElementById("adminPanel").hidden=false}else if(pin!==null)alert("Incorrect PIN");
+};
+document.getElementById("lock").onclick=()=>{locked=true;save();render()};
+document.getElementById("unlock").onclick=()=>{locked=false;save();render()};
+document.getElementById("reset").onclick=()=>{if(confirm("Reset all player selections?")){teams={...FIXED};save();render()}};
+render();
+</script>
+</body>
+</html>
