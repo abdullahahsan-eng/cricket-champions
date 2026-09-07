@@ -50,7 +50,7 @@
 <button class="btn" id="unlock">🔓 Unlock Teams</button>
 <button class="btn" id="reset">↩ Reset Selection</button>
 </div>
-<div class="foot">Demo security: the admin PIN is stored in this page. For a real public event, use the realtime database version described in SETUP.txt.</div>
+<div class="foot">Live database connected. Admin PIN protection is currently browser-side; we can secure admin access later.</div>
 </section>
 </div>
 <script>
@@ -62,7 +62,7 @@ try{teams={...FIXED,...(JSON.parse(localStorage.getItem("ccTeams"))||{})};locked
 Object.assign(teams,FIXED);
 
 function initials(n){return n.split(/\s+/).filter(Boolean).map(x=>x[0]).slice(0,2).join("").toUpperCase()}
-function save(){localStorage.setItem("ccTeams",JSON.stringify(teams));localStorage.setItem("ccLocked",locked?"1":"0")}
+function save(){}
 function playerCard(n,team){
  const fixed=Object.prototype.hasOwnProperty.call(FIXED,n);
  const el=document.createElement("div");el.className="player";
@@ -104,6 +104,97 @@ document.getElementById("lock").onclick=()=>{locked=true;save();render()};
 document.getElementById("unlock").onclick=()=>{locked=false;save();render()};
 document.getElementById("reset").onclick=()=>{if(confirm("Reset all player selections?")){teams={...FIXED};save();render()}};
 render();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://jznihbqdakgnvdgdsbkn.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_llNfMiAQdyvNA31dXKGe9g_eLe1M07s";
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+let dbReady = false;
+let loading = true;
+
+async function loadLiveState(){
+  const [{data: playersData, error: playersError}, {data: settingsData, error: settingsError}] = await Promise.all([
+    db.from("players").select("id,name,team,is_captain").order("id"),
+    db.from("settings").select("id,locked").eq("id",1).single()
+  ]);
+  if(playersError) throw playersError;
+  if(settingsError) throw settingsError;
+
+  teams={};
+  playersData.forEach(x=>{ if(x.team) teams[x.name]=x.team; });
+  Object.assign(teams,FIXED);
+  locked=!!settingsData.locked;
+  dbReady=true;
+  loading=false;
+  render();
+}
+
+async function chooseTeam(name, team){
+  if(locked || Object.prototype.hasOwnProperty.call(FIXED,name)) return;
+  const {error}=await db.from("players").update({team}).eq("name",name);
+  if(error) alert("Team update nahi hua: "+error.message);
+}
+
+async function setLock(value){
+  const {error}=await db.from("settings").update({locked:value}).eq("id",1);
+  if(error) alert("Lock status update nahi hua: "+error.message);
+}
+
+async function resetLive(){
+  if(!confirm("Reset all player selections?")) return;
+  const {error}=await db.from("players").update({team:null}).neq("name", "__captain_never_matches__");
+  if(error){ alert("Reset nahi hua: "+error.message); return; }
+  const {error: e1}=await db.from("players").update({team:"A"}).eq("name","Abdurrahman Arif");
+  const {error: e2}=await db.from("players").update({team:"B"}).eq("name","Nazim Ali");
+  if(e1||e2) alert("Captains restore nahi hue. Supabase mein players check karo.");
+}
+
+// Replace the local-only handlers with live database actions.
+const oldPlayerCard=playerCard;
+playerCard=function(n,team){
+  const fixed=Object.prototype.hasOwnProperty.call(FIXED,n);
+  const el=document.createElement("div");el.className="player";
+  el.innerHTML=`<div class="avatar">${initials(n)}</div><div class="info"><div class="name">${n}</div><div class="role">${fixed?"Captain":team?("Team "+team):"Not selected"}</div></div>${fixed?'<div class="crown">👑</div>':""}`;
+  if(!fixed && !locked && !loading){
+    const sw=document.createElement("div");sw.className="switch";
+    ["A","B"].forEach(t=>{
+      const b=document.createElement("button");b.className="btn";b.textContent=t;
+      b.title=t==="A"?"Join Abdur's Champions":"Join Nazim's Champions";
+      b.onclick=()=>chooseTeam(n,t);
+      sw.appendChild(b);
+    });
+    el.appendChild(sw);
+  }
+  return el;
+};
+
+document.getElementById("lock").onclick=()=>setLock(true);
+document.getElementById("unlock").onclick=()=>setLock(false);
+document.getElementById("reset").onclick=resetLive;
+
+// Live updates for every connected phone/browser.
+db.channel("cricket-champions-live")
+  .on("postgres_changes", {event:"*", schema:"public", table:"players"}, payload=>{
+    if(payload.eventType==="UPDATE" && payload.new){
+      if(payload.new.team) teams[payload.new.name]=payload.new.team;
+      else delete teams[payload.new.name];
+      Object.assign(teams,FIXED);
+      render();
+    }
+  })
+  .on("postgres_changes", {event:"UPDATE", schema:"public", table:"settings"}, payload=>{
+    if(payload.new && payload.new.id===1){ locked=!!payload.new.locked; render(); }
+  })
+  .subscribe();
+
+loadLiveState().catch(err=>{
+  loading=false;
+  document.getElementById("notice").textContent="⚠️ Live database connect nahi hua: "+err.message;
+  document.getElementById("notice").className="notice locked";
+  console.error(err);
+});
 </script>
 </body>
 </html>
