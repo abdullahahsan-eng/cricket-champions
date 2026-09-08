@@ -17,9 +17,20 @@
 
 .replace-backdrop{position:fixed;inset:0;background:rgba(10,10,12,.58);backdrop-filter:blur(5px);display:grid;place-items:center;padding:14px;z-index:9999}.replace-backdrop[hidden]{display:none}.replace-modal{width:min(520px,100%);max-height:min(760px,92vh);overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 24px 70px rgba(0,0,0,.28);display:flex;flex-direction:column}.replace-modal h3{margin:0 0 5px;font-size:20px}.replace-modal p{margin:0 0 12px;color:var(--muted);font-size:12px;line-height:1.5}.replace-current{display:flex;align-items:center;gap:10px;background:#faf8fb;border:1px solid #eee;border-radius:14px;padding:10px 12px;margin-bottom:10px}.replace-current .avatar{width:38px;height:38px;min-width:38px}.replace-current strong{font-size:13px}.replace-current small{display:block;color:var(--muted);font-size:11px;margin-top:2px}.replace-search{width:100%;box-sizing:border-box;border:1px solid #dddeda;border-radius:12px;padding:11px 12px;background:#fff;font:600 13px Inter,sans-serif;outline:none;margin-bottom:10px}.replace-search:focus{border-color:#ec0b78}.candidate-list{overflow:auto;display:flex;flex-direction:column;gap:7px;padding-right:2px}.candidate-title{font-size:11px;font-weight:800;color:#777;text-transform:uppercase;letter-spacing:.08em;margin:5px 2px 2px}.candidate{display:flex;align-items:center;gap:10px;border:1px solid #e6e6e2;border-radius:13px;padding:9px 10px;background:#fff}.candidate .avatar{width:36px;height:36px;min-width:36px}.candidate-info{min-width:0;flex:1}.candidate-info strong{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.candidate-info small{display:block;color:var(--muted);font-size:10px;margin-top:2px}.candidate button{border:1px solid #e3e3df;background:#fff;border-radius:9px;padding:7px 10px;font:800 10px Inter,sans-serif;cursor:pointer}.candidate button:hover{border-color:#ec0b78;color:#ec0b78}.candidate button:disabled{opacity:.45;cursor:not-allowed}.replace-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}.replace-actions .btn{min-width:105px}.change-btn{font-size:10px!important;padding:7px 9px!important;white-space:nowrap}@media(max-width:600px){.replace-modal{width:100%;max-height:88vh;border-radius:18px;padding:14px}.replace-modal h3{font-size:18px}.candidate{padding:8px}.candidate button{padding:8px 9px}.replace-actions .btn{flex:1}.change-btn{font-size:9px!important;padding:7px 7px!important}}
 @media print{body{background:#fff}.wrap{max-width:none;padding:0}.hero,.stats,.all,.admin,.footer{display:none}.teams{grid-template-columns:1fr 1fr;gap:18px}.team{border:2px solid #222;border-radius:10px;box-shadow:none}.player{break-inside:avoid}.print-title{display:block!important;font-size:18px;font-weight:900;margin:0 0 14px}.notice{display:none}}
+
+.welcome-backdrop{position:fixed;inset:0;background:rgba(10,10,12,.62);backdrop-filter:blur(6px);display:grid;place-items:center;padding:16px;z-index:12000}.welcome-backdrop[hidden]{display:none}.welcome-modal{width:min(430px,100%);background:#fff;border:1px solid #e8e8e5;border-radius:26px;padding:26px 22px 22px;text-align:center;box-shadow:0 28px 80px rgba(0,0,0,.3)}.welcome-logo{width:88px;height:88px;object-fit:contain;border-radius:22px;border:1px solid #eee;background:#fff;box-shadow:0 10px 25px rgba(0,0,0,.08);margin:0 auto 14px}.welcome-modal h2{margin:0;font-size:26px;letter-spacing:-.04em}.welcome-modal h2 span{color:var(--pink)}.welcome-modal p{margin:9px 0 5px;color:#666;font-size:13px;line-height:1.5}.welcome-details{font-size:11px;color:#777;margin-bottom:17px}.welcome-btn{width:100%;border:0;border-radius:13px;background:var(--dark);color:#fff;padding:12px 16px;font:800 13px Inter,sans-serif;cursor:pointer}.welcome-btn:hover{background:#25262a}
 </style>
 </head>
 <body>
+<div class="welcome-backdrop" id="welcomeBackdrop" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+  <div class="welcome-modal">
+    <img class="welcome-logo" src="cricket-champions-logo.jpg" alt="Cricket Champions logo">
+    <h2 id="welcomeTitle">Welcome to <span>Cricket Champions</span> 👋</h2>
+    <p>Welcome! Select your team and follow the live tournament updates.</p>
+    <div class="welcome-details">12 September 2026 &nbsp; • &nbsp; 8:00 AM &nbsp; • &nbsp; Tiyala, Hapur</div>
+    <button class="welcome-btn" id="welcomeContinue">Continue to Team Selection →</button>
+  </div>
+</div>
 <div class="wrap" id="app">
 <section class="hero">
 <div class="top">
@@ -74,6 +85,13 @@
 <div class="footer"><div><b>CRICKET CHAMPIONS</b> • A TOURNAMENT OF FRIENDS</div><div class="live"><span class="dot"></span> Live Sync Active</div></div>
 </div>
 <script>
+const welcomeBackdrop = document.getElementById('welcomeBackdrop');
+const welcomeContinue = document.getElementById('welcomeContinue');
+function closeWelcome(){ welcomeBackdrop.hidden = true; }
+welcomeContinue.addEventListener('click', closeWelcome);
+welcomeBackdrop.addEventListener('click', (e)=>{ if(e.target===welcomeBackdrop) closeWelcome(); });
+document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && !welcomeBackdrop.hidden) closeWelcome(); });
+
 const PLAYERS=["Sajid Khalil","Abdul Haq","Imran Khan","Abdul Sattar","Abdurrahman Arif","Mohd. Tayyab","Ashraf Ali Bastavi","Shahzad Ali","Khalid Abdullah","Abdullah Ahsan","Ashraf Husaini","Mohd Muslim","Athar Ali","Nazim Ali","Musab Rafiq","Riyaz","Anwar Ahmad","Rashid Khalil","Md. Hassan (Kaku)","Javed Chaudhary","Arman","Roshan Ali","Jamali Bhai"];
 const FIXED={"Abdurrahman Arif":"A","Nazim Ali":"B"};
 const ADMIN_PIN="1234"; // Change this before publishing if desired.
