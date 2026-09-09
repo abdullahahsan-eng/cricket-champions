@@ -9,7 +9,7 @@
 :root{--bg:#f7f7f8;--card:#fff;--text:#101114;--muted:#777b82;--line:#e7e7ea;--soft:#f3f3f5;--pink:#e5005a;--pink2:#ffedf4;--green:#149b6b;--dark:#111214}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#fff 0,#f7f7f8 55%,#f3f3f5 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh}.wrap{max-width:1160px;margin:auto;padding:24px 22px 42px}
 .hero{background:rgba(255,255,255,.97);border:1px solid var(--line);border-radius:26px;padding:20px 26px 22px;margin-bottom:18px;box-shadow:0 14px 40px rgba(16,17,20,.06)}
-.brandlogos{display:flex;justify-content:center;align-items:center;margin:0 auto 18px;perspective:900px}.logo-flip{width:92px;height:92px;position:relative;transform-style:preserve-3d;animation:logoFlip 7s ease-in-out infinite;filter:drop-shadow(0 10px 18px rgba(16,17,20,.10))}.logo-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:18px;overflow:hidden;display:grid;place-items:center}.logo-face img{width:100%;height:100%;object-fit:contain}.logo-face.cc{background:#fff;border:1px solid #eee}.logo-face.tpl{background:#111a46;transform:rotateY(180deg)}@keyframes logoFlip{0%,42%{transform:rotateY(0deg)}50%,92%{transform:rotateY(180deg)}100%{transform:rotateY(360deg)}}
+.brandlogos{display:flex;justify-content:center;align-items:center;margin:0 auto 18px;perspective:1000px;position:relative}.brandlogos:before,.brandlogos:after{content:"";position:absolute;border:1px solid #f1c8d8;border-radius:50%;pointer-events:none}.brandlogos:before{width:190px;height:54px;transform:rotate(-8deg);opacity:.65}.brandlogos:after{width:250px;height:82px;transform:rotate(7deg);opacity:.35}.logo-flip{width:104px;height:104px;position:relative;filter:drop-shadow(0 12px 22px rgba(16,17,20,.12));z-index:1}.logo-face{position:absolute;inset:0;border-radius:20px;overflow:hidden;display:grid;place-items:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform-style:preserve-3d}.logo-face img{width:100%;height:100%;object-fit:contain}.logo-face.cc{background:#fff;border:1px solid #eee;animation:ccFlip 8s ease-in-out infinite}.logo-face.tpl{background:#111a46;border:1px solid #202d63;animation:tplFlip 8s ease-in-out infinite}.logo-face.tpl img{padding:2px}@keyframes ccFlip{0%,40%{opacity:1;transform:rotateY(0deg) scale(1)}46%,54%{opacity:.15;transform:rotateY(90deg) scale(.98)}60%,100%{opacity:0;transform:rotateY(90deg) scale(.98)}}@keyframes tplFlip{0%,40%{opacity:0;transform:rotateY(-90deg) scale(.98)}46%,54%{opacity:1;transform:rotateY(0deg) scale(1)}60%,100%{opacity:1;transform:rotateY(0deg) scale(1)}}
 .top{display:flex;justify-content:space-between;gap:24px;align-items:center}.brandmark{display:none}.brand{display:flex;align-items:center;gap:18px}.logo{width:88px;height:88px;object-fit:contain;flex:none}.eyebrow{font-size:11px;letter-spacing:.18em;color:var(--muted);font-weight:800}.title{font-size:38px;letter-spacing:-.045em;font-weight:900;margin:5px 0 8px;line-height:1}.title span{color:var(--pink)}.details{color:#666a70;font-size:13px;font-weight:500}.actions{display:flex;flex-wrap:wrap;gap:9px}.btn{border:1px solid #dcdde1;background:#fff;color:var(--text);border-radius:11px;padding:10px 14px;font-weight:750;cursor:pointer;transition:.18s ease;box-shadow:0 2px 0 rgba(0,0,0,.02)}.btn:hover{transform:translateY(-1px);border-color:#c8c9ce}.btn.dark{background:var(--dark);color:#fff;border-color:var(--dark)}.btn:disabled{opacity:.42;cursor:not-allowed;transform:none}.notice{margin-top:18px;padding:12px 15px;border-radius:12px;background:var(--soft);font-size:12px;color:#4e5157;border:1px solid #e9e9ec}.notice::first-letter{color:var(--pink)}.locked{background:#f1f1f2;color:#25262a;font-weight:750}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 18px}.stat{background:#fff;border:1px solid var(--line);border-radius:15px;padding:12px 14px;box-shadow:0 7px 20px rgba(16,17,20,.035)}.stat b{display:block;font-size:20px}.stat span{font-size:10px;color:var(--muted);font-weight:600}
 .teams{display:grid;grid-template-columns:1fr 1fr;gap:18px}.team{background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 10px 30px rgba(16,17,20,.045);position:relative;overflow:hidden}.team:before{content:"";position:absolute;left:0;top:0;width:4px;height:100%;background:var(--pink)}.teamhead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding-left:5px}.teamname{font-size:20px;font-weight:850;letter-spacing:-.025em}.teamname::first-letter{color:var(--pink)}.captain{font-size:12px;color:var(--muted);margin-top:5px}.count{font-size:11px;font-weight:750;padding:6px 10px;border:1px solid var(--line);border-radius:99px;white-space:nowrap;background:#fafafa}.list{margin-top:13px;min-height:52px}.player{display:flex;align-items:center;gap:11px;border:1px solid #e8e8eb;border-radius:14px;padding:9px 10px;margin:7px 0;background:#fff;transition:.18s ease}.player:hover{border-color:#d8d8dc;box-shadow:0 5px 16px rgba(0,0,0,.035)}.avatar{width:42px;height:42px;min-width:42px;border-radius:50%;background:#f0f0f1;display:grid;place-items:center;font-weight:850;font-size:13px}.info{min-width:0;flex:1}.name{font-weight:750;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.role{font-size:10px;color:var(--muted);margin-top:3px}.crown{font-size:15px;color:var(--pink)}.switch{display:flex;gap:5px}.switch button{font-size:10px;padding:7px 9px;border-radius:9px}.switch button:hover{border-color:var(--pink);color:var(--pink)}.switch button.full{border-color:#d7d7da;background:#f6f6f7;color:#777}.adminhint{margin-top:8px;font-size:11px;color:#6f7278}.pm-actions{display:flex;gap:6px;flex-wrap:wrap}.pm-actions .btn{font-size:10px}.capacity{font-size:10px;color:#8a8a88;margin-top:5px}.fullbadge{color:#c24;font-weight:750}
@@ -17,14 +17,42 @@
 @media(max-width:760px){.wrap{padding:12px 10px 28px}.hero{padding:16px 13px 18px;border-radius:20px}.brandlogos{margin-bottom:14px}.logo-flip{width:70px;height:70px}.logo-face{border-radius:14px}.top{flex-direction:column;align-items:flex-start}.brand{gap:12px}.logo{width:68px;height:68px}.title{font-size:29px}.actions{width:100%}.actions .btn{flex:1}.stats{grid-template-columns:repeat(2,1fr)}.teams,.grid{grid-template-columns:1fr}.team,.all,.admin{border-radius:19px}.stat{padding:10px}.stat b{font-size:17px}.pm-actions{width:100%}.pm-actions .btn{flex:1}}
 @media print{body{background:#fff}.wrap{max-width:none;padding:0}.hero,.admin,.all,.stats{display:none}.teams{grid-template-columns:1fr 1fr;gap:18px}.team{border:2px solid #222;border-radius:10px;box-shadow:none}.player{break-inside:avoid}.notice{display:none}.print-title{display:block!important}.teams:before{content:"CRICKET CHAMPIONS • 12 SEPTEMBER 2026 • 8:00 AM • TIYALA, HAPUR";position:absolute;top:-36px;left:0;font-size:15px;font-weight:800}.teams{margin-top:45px}}
 .print-title{display:none}
-.pm{margin-top:14px;border:1px solid var(--line);border-radius:15px;padding:14px;background:#fafafa}.pmform{display:flex;gap:8px;margin-bottom:10px}.pmform input{flex:1;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit}.pmrow{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:11px;padding:9px 10px;margin:6px 0}.pmrow small{display:block;color:var(--muted);font-size:10px;margin-top:3px}.pmrow .btn{padding:7px 9px;font-size:11px}@media(max-width:760px){.pmform{flex-direction:column}.pmform .btn{width:100%}.pmrow{align-items:flex-start}.pmrow .btn{white-space:nowrap}}</style>
+.pm{margin-top:14px;border:1px solid var(--line);border-radius:15px;padding:14px;background:#fafafa}.pmform{display:flex;gap:8px;margin-bottom:10px}.pmform input{flex:1;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit}.pmrow{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:11px;padding:9px 10px;margin:6px 0}.pmrow small{display:block;color:var(--muted);font-size:10px;margin-top:3px}.pmrow .btn{padding:7px 9px;font-size:11px}@media(max-width:760px){.pmform{flex-direction:column}.pmform .btn{width:100%}.pmrow{align-items:flex-start}.pmrow .btn{white-space:nowrap}}
+.hero{position:relative;overflow:hidden}.hero:before,.hero:after{content:"";position:absolute;pointer-events:none;border:1px solid #f0c5d7;border-radius:50%;opacity:.55}.hero:before{width:520px;height:150px;right:-170px;top:-70px;transform:rotate(-13deg)}.hero:after{width:420px;height:120px;left:-180px;bottom:-78px;transform:rotate(12deg);opacity:.32}.hero .top,.hero .notice{position:relative;z-index:2}.swap-backdrop{position:fixed;inset:0;background:rgba(8,9,12,.58);backdrop-filter:blur(6px);display:grid;place-items:center;padding:14px;z-index:15000}.swap-backdrop[hidden]{display:none}.swap-modal{width:min(520px,100%);max-height:90vh;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 28px 80px rgba(0,0,0,.3)}.swap-modal h3{margin:0 0 5px;font-size:20px}.swap-modal p{margin:0 0 14px;color:var(--muted);font-size:12px;line-height:1.5}.swap-current{display:flex;align-items:center;gap:10px;background:#fafafa;border:1px solid var(--line);border-radius:13px;padding:10px;margin-bottom:12px}.swap-current .avatar{width:38px;height:38px;min-width:38px}.swap-current small{display:block;color:var(--muted);font-size:10px;margin-top:2px}.swap-select{width:100%;border:1px solid #dfe0e3;border-radius:12px;padding:11px 12px;background:#fff;font:700 12px Inter,sans-serif;outline:none}.swap-select:focus{border-color:var(--pink);box-shadow:0 0 0 3px #ffe4ee}.swap-help{font-size:10px;color:#777;margin-top:7px}.swap-actions{display:flex;gap:8px;margin-top:14px}.swap-actions .btn{flex:1}.delete-btn{border-color:#f0ccd9!important;color:#b00045!important}.selected-action{margin-top:5px}.selected-action .btn{font-size:10px;padding:7px 9px}@media(max-width:760px){.logo-flip{width:78px;height:78px}.brandlogos:before{width:150px;height:48px}.brandlogos:after{width:205px;height:70px}.swap-modal{border-radius:18px;padding:14px}.swap-modal h3{font-size:18px}}
+
+/* V6-inspired pink premium theme */
+:root{--pink:#ec0a67;--pink2:#fff0f6;--pink3:#ff4d9b;--ink:#121318;--line:#e8e5e9}
+body{background:radial-gradient(circle at 50% -12%,#fff 0,#fff8fb 38%,#f6f3f5 100%)}
+.hero{border-color:#f0d9e3;box-shadow:0 18px 55px rgba(236,10,103,.08)}
+.hero:before{border-color:#f3b5cf;box-shadow:0 0 0 12px rgba(236,10,103,.025)}
+.hero:after{border-color:#f6cadd}
+.brandlogos:before{border-color:#ec0a67;opacity:.28}.brandlogos:after{border-color:#ec0a67;opacity:.16}
+.logo-flip{filter:drop-shadow(0 14px 28px rgba(236,10,103,.16))}
+.eyebrow{color:#8a4b68}.title{font-size:40px}.title::after{content:"";display:block;width:92px;height:4px;border-radius:99px;background:linear-gradient(90deg,var(--pink),#ff9bc5,transparent);margin-top:10px}.details{color:#66616a}
+.btn.dark{background:linear-gradient(135deg,#17181d,#25262c);border-color:#17181d}.btn:hover{border-color:#f09abd;box-shadow:0 6px 18px rgba(236,10,103,.08)}
+.notice{background:linear-gradient(90deg,#fff1f7,#faf7f9);border-color:#f5ccdc;box-shadow:inset 4px 0 0 var(--pink)}.notice strong{color:var(--pink)}
+.stat{border-color:#eee0e6;box-shadow:0 9px 25px rgba(236,10,103,.045)}.stat b{color:#15151a}.stat span{color:#777078}
+.team{border-color:#eadfe5;box-shadow:0 12px 34px rgba(236,10,103,.055)}.team:before{width:5px;background:linear-gradient(180deg,var(--pink),#ff8bb8,var(--pink))}.teamname{color:#16161a}.teamname::first-letter{color:var(--pink)}
+.teamname{position:relative}.teamname span{color:var(--pink)}.teamname::after{content:"";display:inline-block;width:30px;height:3px;border-radius:99px;background:#f7a4c4;margin-left:9px;vertical-align:middle}
+.count{border-color:#f1cedc;background:#fff7fa;color:#a70049}.player{border-color:#ece5e9}.player:hover{border-color:#f2b7ce;box-shadow:0 7px 18px rgba(236,10,103,.07)}
+.avatar{background:linear-gradient(145deg,#fff0f6,#f1edf0);border:1px solid #f1d2df}.role{color:#827781}.crown{color:var(--pink)}
+.switch button.active,.switch button:hover{background:#ffe4ef;border-color:#f3a4c3;color:#c80055}.switch button.full{background:#f6f3f5}
+.all,.admin{border-color:#eadfe5;box-shadow:0 12px 34px rgba(236,10,103,.045)}
+.all h2,.admin h2{color:#18181d}.all h2::after,.admin h2::after{content:"";display:inline-block;width:34px;height:3px;border-radius:99px;background:var(--pink);margin-left:9px;vertical-align:middle}.pm{background:linear-gradient(180deg,#fff9fb,#faf7f9);border-color:#f0dbe4}.pmform input:focus{border-color:#ef9dbd;box-shadow:0 0 0 3px #ffe7f0}
+.pmrow{border-color:#eee4e9}.pmrow:hover{border-color:#f1b4ca}.delete-btn{background:#fff4f7!important;color:#b00045!important;border-color:#f1bfd1!important}
+.fullbadge{color:var(--pink)}
+.team .count{position:relative}.team .count::before{content:"MAX 12";font-size:8px;letter-spacing:.06em;color:#b00045;margin-right:5px}
+@media(max-width:760px){.title{font-size:31px}.teamname{font-size:19px}.team .count::before{display:none}}
+@media(prefers-reduced-motion:reduce){.logo-face.cc,.logo-face.tpl{animation:none}.logo-face.cc{opacity:1;transform:none}.logo-face.tpl{opacity:0;transform:none}}
+
+\n/* FINAL BLUE + PINK CHAMPIONS / TPL THEME */\n:root{--pink:#e90067;--pink2:#fff0f7;--blue:#17265f;--blue2:#253b91;--blueSoft:#eef2ff;--gold:#f3b83f}\nbody{background:radial-gradient(circle at 50% -10%,#fff 0,#fff8fb 34%,#f1f4fb 72%,#edf0f7 100%)}\n.hero{background:linear-gradient(135deg,rgba(255,255,255,.98),rgba(255,248,252,.98));border-color:#eadde6;box-shadow:0 18px 55px rgba(23,38,95,.08),0 8px 30px rgba(233,0,103,.045)}\n.brandlogos{height:116px;margin-bottom:12px}\n.brandlogos:before{width:300px;height:72px;border:2px solid rgba(233,0,103,.18);transform:rotate(-7deg);box-shadow:0 0 0 10px rgba(23,38,95,.025)}\n.brandlogos:after{width:360px;height:88px;border:1px solid rgba(23,38,95,.18);transform:rotate(8deg)}\n.logo-flip{width:108px;height:108px;perspective:1000px}\n.logo-face{border-radius:20px;box-shadow:0 10px 25px rgba(23,38,95,.12)}\n.logo-face.cc{background:#fff;border:1px solid #f0dce6;transform:rotateY(0deg)}\n.logo-face.tpl{background:#111a46;border:1px solid #253b91;transform:rotateY(180deg)}\n.logo-face img{padding:3px}\n/* one physical flip stage: front -> back -> front */\n.logo-flip{animation:championLogoFlip 8s cubic-bezier(.45,.05,.35,1) infinite;transform-style:preserve-3d}\n@keyframes championLogoFlip{0%,38%{transform:rotateY(0deg)}48%,52%{transform:rotateY(180deg)}62%,100%{transform:rotateY(360deg)}}\n.logo-face.cc,.logo-face.tpl{animation:none!important;opacity:1!important}\n.top{position:relative}\n.top:after{content:"";position:absolute;left:-25px;right:20%;bottom:-13px;height:2px;background:linear-gradient(90deg,var(--pink),rgba(233,0,103,.25),transparent);border-radius:99px}\n.eyebrow{color:var(--blue);letter-spacing:.22em}.title{color:#111}.title span{color:var(--pink)}\n.title:after{background:linear-gradient(90deg,var(--pink),var(--blue2),transparent);height:4px}\n.details{color:#5d6270}.notice{background:linear-gradient(90deg,#fff0f7,#f3f5ff);border-color:#eadbe7;box-shadow:inset 5px 0 0 var(--pink),inset -5px 0 0 var(--blue)}\n.notice strong{color:var(--pink)}\n.stat{border-color:#e5e5ec}.stat:first-child{box-shadow:inset 0 3px 0 var(--pink),0 9px 25px rgba(233,0,103,.04)}.stat:nth-child(2){box-shadow:inset 0 3px 0 var(--blue2),0 9px 25px rgba(23,38,95,.04)}\n.team{border-color:#e5e3ea}.team:first-child:before{background:linear-gradient(180deg,var(--pink),#ff72ae)}.team:nth-child(2):before{background:linear-gradient(180deg,var(--blue2),#6c80d6)}\n.team:first-child .teamname span{color:var(--pink)}.team:nth-child(2) .teamname span{color:var(--blue2)}\n.team:first-child .teamname:after{background:var(--pink)}.team:nth-child(2) .teamname:after{background:var(--blue2)}\n.count{background:linear-gradient(90deg,#fff1f7,#fff);border-color:#efc8da;color:#b50051}.team:nth-child(2) .count{background:linear-gradient(90deg,#f0f3ff,#fff);border-color:#cbd4f4;color:var(--blue)}\n.team .count::before{color:var(--pink)}.team:nth-child(2) .count::before{color:var(--blue2)}\n.player:hover{border-color:#efb1cc}.team:nth-child(2) .player:hover{border-color:#c7d0ef}.avatar{background:linear-gradient(145deg,#fff0f7,#eef1fb);border-color:#ead8e4}.switch button.active,.switch button:hover{background:#ffe3ef;border-color:#f09ac0;color:#c40055}.team:nth-child(2) .switch button.active,.team:nth-child(2) .switch button:hover{background:#e9edff;border-color:#9daae1;color:var(--blue)}\n.all h2:after,.admin h2:after{background:linear-gradient(90deg,var(--pink),var(--blue2))}.pm{background:linear-gradient(135deg,#fff9fc,#f7f8ff);border-color:#e6e1e9}.pmrow:hover{border-color:#d8c6f0;box-shadow:0 5px 18px rgba(23,38,95,.06)}\n.btn.pink{background:var(--pink);border-color:var(--pink)}.btn.blue{background:var(--blue);color:#fff;border-color:var(--blue)}\n.remove-btn{border-color:#ccd5f0!important;color:var(--blue)!important;background:#f4f6ff!important}\n.delete-btn{background:#fff3f7!important;color:#b00045!important;border-color:#f1bfd1!important}\n.fullbadge{color:var(--pink)}\n.adminrow .btn:nth-child(2){color:var(--blue);border-color:#ccd5ef}.adminrow .btn:nth-child(3){color:#9f0048}.adminrow .btn:nth-child(4){background:#f3f5ff;color:var(--blue);border-color:#d5dcf4}\n@media(max-width:760px){.brandlogos{height:84px}.logo-flip{width:78px;height:78px}.brandlogos:before{width:180px;height:45px}.brandlogos:after{width:225px;height:58px}.top:after{right:0}.switch{flex-wrap:wrap}.switch .btn{flex:1}.selected-action .btn{flex:1}}\n@media(prefers-reduced-motion:reduce){.logo-flip{animation:none;transform:none}.logo-face.tpl{transform:rotateY(180deg)}}\n</style>
 </head>
 <body>
 <div class="wrap" id="app">
 <section class="hero">
-<div class="brandlogos" aria-label="Tournament logos"><div class="logo-flip"><div class="logo-face cc"><img src="cricket-champions-logo-user.jpg" alt="Cricket Champions"></div><div class="logo-face tpl"><img src="tpl-champions-logo-user.jpg" alt="TPL Champions"></div></div></div>
+<div class="brandlogos" aria-label="Cricket Champions and TPL logos"><div class="logo-flip"><div class="logo-face cc"><img src="cricket-champions-logo-user.jpg" alt="Cricket Champions"></div><div class="logo-face tpl"><img src="tpl-champions-logo-user.jpg" alt="TPL Champions"></div></div></div>
 <div class="top">
-<div class="brand"><div class="brandmark">CC</div><div><div class="eyebrow">CRICKET TOURNAMENT</div><div class="title">CRICKET CHAMPIONS</div><div class="details">12 September 2026 • Saturday • 8:00 AM • Tiyala, Hapur</div></div></div>
+<div class="brand"><div class="brandmark">CC</div><div><div class="eyebrow">CRICKET TOURNAMENT</div><div class="title">CRICKET <span>CHAMPIONS</span></div><div class="details">12 September 2026 • Saturday • 8:00 AM • Tiyala, Hapur</div></div></div>
 <div class="actions"><button class="btn" id="print">🖨 Print Team Sheet</button><button class="btn dark" id="adminBtn">🔐 Admin</button></div>
 </div>
 <div class="notice" id="notice">Team selection is OPEN. Maximum 12 players per team. You can add unlimited players.</div>
@@ -39,23 +67,23 @@
 <div class="stat"><b id="liveStatus">Live</b><span>Selection Status</span></div>
 </section>
 <section class="teams">
-<div class="team"><div class="teamhead"><div><div class="teamname">🏆 Abdur's Champions</div><div class="captain">👑 Captain: Abdurrahman Arif</div></div><div class="count" id="acount">1 player</div></div><div class="list" id="a"></div></div>
-<div class="team"><div class="teamhead"><div><div class="teamname">🏆 Nazim's Champions</div><div class="captain">👑 Captain: Nazim Ali</div></div><div class="count" id="bcount">1 player</div></div><div class="list" id="b"></div></div>
+<div class="team"><div class="teamhead"><div><div class="teamname">🏆 Abdur's <span>Champions</span></div><div class="captain">👑 Captain: Abdurrahman Arif</div></div><div class="count" id="acount">1 player</div></div><div class="list" id="a"></div></div>
+<div class="team"><div class="teamhead"><div><div class="teamname">🏆 Nazim's <span>Champions</span></div><div class="captain">👑 Captain: Nazim Ali</div></div><div class="count" id="bcount">1 player</div></div><div class="list" id="b"></div></div>
 </section>
 
 <section class="all">
 <div class="alltop"><div><h2>All Players</h2><div class="allsub">Choose your side while selection is open</div></div><div class="allsub">Live selection</div></div><div id="players" class="grid"></div>
-<div class="foot">Players can move between teams while selection is unlocked. Maximum 12 players per team. Unselected players are unlimited. Captains are fixed.</div>
+<div class="foot">Maximum 12 players per team. Unselected players are unlimited. Captains are fixed. Full team mein naya player lane ke liye selected player ke saamne Swap / Replace use karein.</div>
 </section>
 
 <section class="admin" id="adminPanel" hidden>
-<h2>Admin Control</h2><p>Admin mode controls team selection, player management, and full-team swap/replace.</p>
+<h2>Admin Control</h2><p>Admin mode controls team selection and player management.</p>
 <div class="adminrow">
 <button class="btn dark" id="lock">🔒 Lock Teams</button>
 <button class="btn" id="unlock">🔓 Unlock Teams</button>
-<button class="btn" id="reset">↩ Reset Selection</button>
+<button class="btn" id="reset">↩ Reset Selection</button><button class="btn" id="restoreBase">♻ Restore Base Players</button><button class="btn" id="printAdmin">🖨 Print Team Sheet</button>
 </div>
-<div class="pm"><b>👥 Player Management</b><div class="allsub" style="margin:5px 0 10px">Add unlimited players. Each team can contain a maximum of 12. Use Move / Swap / Replace when a team is full.</div><div class="pmform"><input id="newPlayerName" placeholder="Enter new player name"><button class="btn dark" id="addPlayer">＋ Add Player</button></div><div id="playerManager"></div></div>
+<div class="pm"><b>👥 Player Management</b><div class="allsub" style="margin:5px 0 10px">Add unlimited players. Teams max 12 each. Edit/Delete yahan se; Swap/Replace sirf selected player ke saamne.</div><div class="pmform"><input id="newPlayerName" placeholder="Enter new player name"><button class="btn dark" id="addPlayer">＋ Add Player</button></div><div id="playerManager"></div></div>
 <div class="foot">Live database connected. Admin PIN protection is currently browser-side; we can secure admin access later.</div>
 </section>
 </div>
@@ -79,12 +107,12 @@ function playerCard(p){
   ['A','B'].forEach(t=>{
    const b=document.createElement('button'); b.className='btn'; b.textContent=t;
    const full=teamCount(t)>=12 && team!==t;
-   b.title=full ? (admin?'Team '+t+' full — click to Swap/Replace':'Team '+t+' is full') : (t==='A'?"Join Abdur's Champions":"Join Nazim's Champions");
-   b.disabled=(team===t)||(!admin && full);
-   if(full && admin) b.classList.add('full');
-   b.onclick=()=>chooseTeam(p.id,t);
-   sw.appendChild(b);
+   b.title=full ? 'Team '+t+' is full — use selected player Swap / Replace' : (t==='A'?"Join Abdur's Champions":"Join Nazim's Champions");
+   b.disabled=(team===t)||full;
+   if(full) b.classList.add('full');
+   b.onclick=()=>chooseTeam(p.id,t); sw.appendChild(b);
   });
+  if(team && admin){const sb=document.createElement('button');sb.className='btn';sb.textContent='↔ Swap / Replace';sb.title='Selected player ko opposite team ya unselected player se change karo';sb.onclick=()=>openSwap(p.id);sw.appendChild(sb); const rb=document.createElement('button');rb.className='btn remove-btn';rb.textContent='↩ Remove';rb.title='Player ko team se hata kar All Players mein bhejo';rb.onclick=()=>removeFromTeam(p.id);sw.appendChild(rb)}
   el.appendChild(sw);
  }
  return el;
@@ -99,39 +127,55 @@ async function loadLiveState(){
  players=pd||[];locked=!!sd.locked;loading=false;render();renderPlayerManager();
 }
 async function chooseTeam(id,team){
- if(locked)return;
- const p=players.find(x=>x.id===id);
- if(!p||p.is_captain||p.team===team)return;
- const currentTeam=p.team||null;
- const targetCount=teamCount(team);
- if(targetCount<12){
-  const {error}=await db.from('players').update({team}).eq('id',id);
-  if(error)alert('Team update nahi hua: '+error.message); else await loadLiveState();
-  return;
- }
- if(!admin){alert('Team '+team+' already has 12 players. Admin mode me Swap / Replace available hai.');return;}
- const candidates=players.filter(x=>x.team===team&&!x.is_captain);
- if(!candidates.length){alert('Is team me replace/swap ke liye koi non-captain player nahi hai.');return;}
- const menu=candidates.map((x,i)=>`${i+1}. ${x.name}`).join('\n');
- const raw=prompt(`Team ${team} full hai.\n\nSwap / Replace ke liye jis player ko bahar karna hai uska number likho:\n\n${menu}`,'1');
- if(raw===null)return;
- const idx=parseInt(raw,10)-1;
- if(!Number.isInteger(idx)||idx<0||idx>=candidates.length){alert('Invalid player number.');return;}
- const targetPlayer=candidates[idx];
- if(currentTeam===null){
-  const {error:e1}=await db.from('players').update({team}).eq('id',id);
-  if(e1){alert('Replace nahi hua: '+e1.message);return;}
-  const {error:e2}=await db.from('players').update({team:null}).eq('id',targetPlayer.id);
-  if(e2){await db.from('players').update({team:null}).eq('id',id);alert('Replace complete nahi hua: '+e2.message);return;}
-  alert(`${p.name} → Team ${team}\n${targetPlayer.name} → Unselected`);
- }else{
-  const {error:e1}=await db.from('players').update({team}).eq('id',id);
-  if(e1){alert('Swap nahi hua: '+e1.message);return;}
-  const {error:e2}=await db.from('players').update({team:currentTeam}).eq('id',targetPlayer.id);
-  if(e2){await db.from('players').update({team:currentTeam}).eq('id',id);alert('Swap complete nahi hua: '+e2.message);return;}
-  alert(`${p.name} ↔ ${targetPlayer.name} swapped`);
- }
+ if(locked)return; const p=players.find(x=>x.id===id); if(!p||p.is_captain||p.team===team)return;
+ if(teamCount(team)>=12){alert(`Team ${team} mein maximum 12 players ho sakte hain. Selected player ke samne Swap / Replace option use karo.`);return;}
+ const {error}=await db.from('players').update({team}).eq('id',id); if(error)alert('Team update nahi hua: '+error.message); else await loadLiveState();
+}
+function openSwap(id){
+ const p=players.find(x=>x.id===id); if(!p||p.is_captain||!p.team)return;
+ const select=$('swapTarget'); select.innerHTML=''; const other=p.team==='A'?'B':'A';
+ const ownGroup=document.createElement('optgroup'); ownGroup.label=`Team ${p.team} — same team (not allowed)`;
+ players.filter(x=>x.team===p.team&&!x.is_captain&&x.id!==p.id).forEach(x=>{const o=document.createElement('option');o.value='same:'+x.id;o.textContent=x.name;o.disabled=true;ownGroup.appendChild(o)});
+ if(!ownGroup.children.length){const o=document.createElement('option');o.textContent='No other player';o.disabled=true;ownGroup.appendChild(o)} select.appendChild(ownGroup);
+ const otherGroup=document.createElement('optgroup'); otherGroup.label=`Team ${other} — Swap allowed`;
+ players.filter(x=>x.team===other&&!x.is_captain).forEach(x=>{const o=document.createElement('option');o.value='swap:'+x.id;o.textContent=x.name;otherGroup.appendChild(o)});
+ if(!otherGroup.children.length){const o=document.createElement('option');o.textContent='No player available';o.disabled=true;otherGroup.appendChild(o)} select.appendChild(otherGroup);
+ const unGroup=document.createElement('optgroup'); unGroup.label='Unselected — Replace allowed';
+ players.filter(x=>!x.team&&!x.is_captain).forEach(x=>{const o=document.createElement('option');o.value='replace:'+x.id;o.textContent=x.name;unGroup.appendChild(o)});
+ if(!unGroup.children.length){const o=document.createElement('option');o.textContent='No unselected player';o.disabled=true;unGroup.appendChild(o)} select.appendChild(unGroup);
+ $('swapCurrent').innerHTML=`<div class="avatar">${esc(initials(p.name))}</div><div><b>${esc(p.name)}</b><small>Currently Team ${p.team}</small></div>`;
+ $('swapText').textContent=`Opposite team ke selected player se Swap karein, ya Unselected player se Replace karein. Same-team players allowed nahi hain.`;
+ $('swapBackdrop').dataset.playerId=String(id); $('swapBackdrop').hidden=false;
+}
+async function confirmSwap(){
+ const id=+$('swapBackdrop').dataset.playerId; const p=players.find(x=>x.id===id); const val=$('swapTarget').value; if(!p||!val)return;
+ const [mode,targetIdRaw]=val.split(':'); const target=players.find(x=>x.id===+targetIdRaw); if(!target)return;
+ if(mode==='same'){alert('Same team ke player se Swap / Replace nahi ho sakta. Opposite team ka player select karo.');return;}
+ if(!confirm(mode==='swap'?`${p.name} ↔ ${target.name} swap karein?`:`${p.name} ko ${target.name} se replace karein?`))return;
+ try{
+  if(mode==='swap'){
+   const r1=await db.from('players').update({team:target.team}).eq('id',p.id); if(r1.error)throw r1.error;
+   const r2=await db.from('players').update({team:p.team}).eq('id',target.id); if(r2.error){await db.from('players').update({team:p.team}).eq('id',p.id);throw r2.error;}
+  }else{
+   const r1=await db.from('players').update({team:p.team}).eq('id',target.id); if(r1.error)throw r1.error;
+   const r2=await db.from('players').update({team:null}).eq('id',p.id); if(r2.error){await db.from('players').update({team:null}).eq('id',target.id);throw r2.error;}
+  }
+  closeSwap(); await loadLiveState();
+ }catch(e){alert('Swap / Replace nahi hua: '+e.message)}
+}
+function closeSwap(){$('swapBackdrop').hidden=true;$('swapBackdrop').dataset.playerId=''}
+async function removeFromTeam(id){
+ const p=players.find(x=>x.id===id); if(!p||p.is_captain)return;
+ if(locked){alert('Teams locked hain. Pehle Unlock Teams karo.');return;}
+ if(!confirm(`${p.name} ko Team ${p.team} se remove karke Unselected mein bhejein?`))return;
+ const {error}=await db.from('players').update({team:null}).eq('id',id);
+ if(error){alert('Player remove nahi hua: '+error.message);return;}
  await loadLiveState();
+}
+async function deletePlayer(id){
+ const p=players.find(x=>x.id===id); if(!p||p.is_captain)return;
+ if(!confirm(`Delete player "${p.name}"? Ye Team Selection aur Live Score se remove ho jayega.`))return;
+ const {error}=await db.from('players').delete().eq('id',id); if(error){alert('Player delete nahi hua: '+error.message);return} await loadLiveState();
 }
 async function setLock(value){const {error}=await db.from('settings').update({locked:value}).eq('id',1);if(error)alert('Lock status update nahi hua: '+error.message);else await loadLiveState()}
 async function resetLive(){
@@ -146,6 +190,20 @@ async function addPlayer(){
  if(error){alert('Player add nahi hua: '+error.message);return}
  input.value='';await loadLiveState();
 }
+const BASE_PLAYERS=[
+'Sajid Khalil','Abdul Haq','Imran Khan','Abdul Sattar','Abdurrahman Arif','Mohd. Tayyab','Ashraf Ali Bastavi','Shahzad Ali','Khalid Abdullah','Abdullah Ahsan','Ashraf Husaini','Mohd Muslim','Athar Ali','Nazim Ali','Musab Rafiq','Riyaz','Anwar Ahmad','Rashid Khalil','Md. Hassan (Kaku)','Javed Chaudhary','Arman','Roshan Ali','Jamali'
+];
+async function restoreBasePlayers(){
+ if(!admin)return;
+ const missing=BASE_PLAYERS.filter(n=>!players.some(p=>p.name.trim().toLowerCase()===n.toLowerCase()));
+ if(!missing.length){alert('Base 23 players already present.');return;}
+ if(!confirm(`${missing.length} missing base player(s) add karne hain? Existing selections safe rahengi.`))return;
+ const rows=missing.map(name=>({name,team:null,is_captain:false}));
+ const {error}=await db.from('players').insert(rows);
+ if(error){alert('Base players restore nahi hue: '+error.message);return;}
+ await loadLiveState();
+ alert(`${missing.length} base player(s) restore ho gaye.`);
+}
 async function editPlayer(id){
  const p=players.find(x=>x.id===id);if(!p)return;
  const nextRaw=prompt('Player name correct karo:',p.name);if(nextRaw===null)return;const next=nextRaw.trim();if(!next||next===p.name)return;
@@ -157,27 +215,22 @@ function render(){
  players.forEach(x=>{if(x.team==='A')a.appendChild(playerCard(x));else if(x.team==='B')b.appendChild(playerCard(x));else p.appendChild(playerCard(x))});
  if(!a.children.length)a.innerHTML='<div class="empty">No players selected</div>';if(!b.children.length)b.innerHTML='<div class="empty">No players selected</div>';
  const ac=teamCount('A'),bc=teamCount('B'),un=players.filter(x=>!x.team).length;$('acount').textContent=ac+' '+(ac===1?'player':'players');$('bcount').textContent=bc+' '+(bc===1?'player':'players');$('statA').textContent=ac;$('statB').textContent=bc;$('statU').textContent=un;
- const n=$('notice');n.textContent=locked?'🔒 Teams are LOCKED. No player can change teams.':'Team selection is OPEN. Maximum 12 players per team.';n.className='notice'+(locked?' locked':'');$('lock').disabled=locked;$('unlock').disabled=!locked;$('liveStatus').textContent=locked?'Locked':'Live';
+ const n=$('notice');n.innerHTML=locked?'🔒 Teams are <strong>LOCKED</strong>. No player can change teams.':'Team selection is <strong>OPEN</strong>. Maximum 12 players per team.';n.className='notice'+(locked?' locked':'');$('lock').disabled=locked;$('unlock').disabled=!locked;$('liveStatus').textContent=locked?'Locked':'Live';
 }
 function renderPlayerManager(){
  const box=$('playerManager');if(!box)return;box.innerHTML='';
  players.forEach(p=>{
   const row=document.createElement('div');row.className='pmrow';
   const status=p.is_captain?'Captain':(p.team?'Team '+p.team:'Unselected');
-  row.innerHTML=`<div><b>${esc(p.name)}</b><small>${status}</small></div><div class="pm-actions"><button class="btn" data-edit>✏️ Edit</button>${!p.is_captain?'<button class="btn" data-move>↔ Move / Swap</button>':''}</div>`;
+  row.innerHTML=`<div><b>${esc(p.name)}</b><small>${status}</small></div><div class="pm-actions"><button class="btn" data-edit>✏️ Edit</button>${!p.is_captain?'<button class="btn delete-btn" data-delete>🗑 Delete</button>':''}</div>`;
   row.querySelector('[data-edit]').onclick=()=>editPlayer(p.id);
-  const mv=row.querySelector('[data-move]');
-  if(mv)mv.onclick=()=>{
-   if(locked){alert('Teams locked hain. Pehle Unlock Teams karo.');return;}
-   const target=prompt(`Target team choose karo:\nA = Abdur's Champions\nB = Nazim's Champions`,p.team==='A'?'B':'A');
-   if(target)chooseTeam(p.id,target.trim().toUpperCase());
-  };
   box.appendChild(row);
  });
 } 
+$('swapCancel').onclick=closeSwap;$('swapConfirm').onclick=confirmSwap;$('swapBackdrop').addEventListener('click',e=>{if(e.target.id==='swapBackdrop')closeSwap()});
 $('print').onclick=()=>window.print();
 $('adminBtn').onclick=()=>{if(admin){$('adminPanel').hidden=true;admin=false;return}const pin=prompt('Enter Admin PIN:');if(pin===ADMIN_PIN){admin=true;$('adminPanel').hidden=false;renderPlayerManager()}else if(pin!==null)alert('Incorrect PIN')};
-$('lock').onclick=()=>setLock(true);$('unlock').onclick=()=>setLock(false);$('reset').onclick=resetLive;$('addPlayer').onclick=addPlayer;$('newPlayerName').addEventListener('keydown',e=>{if(e.key==='Enter')addPlayer()});
+$('lock').onclick=()=>setLock(true);$('unlock').onclick=()=>setLock(false);$('reset').onclick=resetLive;$('restoreBase').onclick=restoreBasePlayers;$('printAdmin').onclick=()=>window.print();$('addPlayer').onclick=addPlayer;$('newPlayerName').addEventListener('keydown',e=>{if(e.key==='Enter')addPlayer()});
 let refreshTimer;function refresh(){clearTimeout(refreshTimer);refreshTimer=setTimeout(()=>loadLiveState().catch(console.error),150)}
 db.channel('cricket-champions-live').on('postgres_changes',{event:'*',schema:'public',table:'players'},refresh).on('postgres_changes',{event:'*',schema:'public',table:'settings'},refresh).subscribe();
 loadLiveState().catch(err=>{loading=false;$('notice').textContent='⚠️ Live database connect nahi hua: '+err.message;$('notice').className='notice locked';console.error(err)});
