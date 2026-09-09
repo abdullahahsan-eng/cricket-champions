@@ -59,11 +59,19 @@ body{background:radial-gradient(circle at 50% -12%,#fff 0,#fff8fb 38%,#f6f3f5 10
 .print-btn{border-color:#efb2ca!important}.print-btn .icon{stroke-width:2.2}
 @media(max-width:760px){.actions{gap:6px}.actions .btn{padding:8px 9px;font-size:11px}.adminrow .btn{padding:7px 8px;font-size:10px}.logo-flip{width:78px;height:78px}.brandlogos:before{width:180px;height:45px}.brandlogos:after{width:225px;height:58px}}
 
-@media(max-width:760px){.brandlogos{height:84px}.logo-flip{width:78px;height:78px}.brandlogos:before{width:180px;height:45px}.brandlogos:after{width:225px;height:58px}.top:after{right:0}.switch{flex-wrap:wrap}.switch .btn{flex:1}.selected-action .btn{flex:1}}\n@media(prefers-reduced-motion:reduce){.logo-flip{animation:none;transform:none}.logo-face.tpl{transform:rotateY(180deg)}}\n</style>
+@media(max-width:760px){.brandlogos{height:84px}.logo-flip{width:78px;height:78px}.brandlogos:before{width:180px;height:45px}.brandlogos:after{width:225px;height:58px}.top:after{right:0}.switch{flex-wrap:wrap}.switch .btn{flex:1}.selected-action .btn{flex:1}}\n@media(prefers-reduced-motion:reduce){.logo-flip{animation:none;transform:none}.logo-face.tpl{transform:rotateY(180deg)}}\n
+/* V13 single-line moving tournament + sponsor ticker */
+.sponsor-marquee{position:absolute;left:28px;top:22px;width:44%;max-width:620px;overflow:hidden;white-space:nowrap;border:1px solid rgba(232,24,111,.14);background:linear-gradient(90deg,rgba(255,242,248,.94),rgba(243,247,255,.78));border-radius:999px;padding:8px 0;box-shadow:0 8px 24px rgba(20,25,60,.05)}
+.sponsor-track{display:inline-flex;align-items:center;gap:10px;white-space:nowrap;padding-left:100%;animation:v13ticker 22s linear infinite;font-size:10px;font-weight:850;letter-spacing:.07em;color:#18265f;text-transform:none}.sponsor-track span:first-child{color:var(--pink)}.sponsor-track strong{color:var(--blue)}.sponsor-track i{font-style:normal;color:var(--pink);font-weight:900}
+@keyframes v13ticker{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+@media(max-width:760px){.sponsor-marquee{position:relative;left:auto;top:auto;width:100%;max-width:100%;margin:-2px 0 10px}.sponsor-track{font-size:9px;gap:8px}.actions .btn{font-size:10px;padding:6px 8px;min-height:31px}.actions .icon{width:14px;height:14px}}
+@media print{.sponsor-marquee,.actions,.admin,.all,.stats,.notice,.hero{display:none!important}.teams{display:grid!important;grid-template-columns:1fr 1fr!important;gap:18px!important}.team{display:block!important}.player{display:flex!important;break-inside:avoid}.player .name{font-size:14px!important;font-weight:800!important}.player .role{font-size:10px!important}.player .switch,.player button{display:none!important}.print-title{display:block!important;font-size:20px;font-weight:900;margin-bottom:6px}.print-title:after{content:'  •  TIYALA PREMIER LEAGUE (TPL)  •  POWERED BY SK PRINT HOUSE  •  SPONSORED BY ASIA TIMES, EARTHBITES, WIND SOUND ENTERPRISES, JAIPUR POLY CLINIC, RIHAN STATIONERY';display:block;font-size:11px;font-weight:700;margin-top:5px}.teams{margin-top:25px!important}}
+</style>
 </head>
 <body>
 <div class="wrap" id="app">
 <section class="hero">
+<div class="sponsor-marquee" aria-label="Tournament and sponsors"><div class="sponsor-track"><span>TIYALA PREMIER LEAGUE (TPL)</span><i>•</i><span>POWERED BY <strong>SK PRINT HOUSE</strong></span><i>•</i><span>SPONSORED BY ASIA TIMES</span><i>•</i><span>EARTHBITES</span><i>•</i><span>WIND SOUND ENTERPRISES</span><i>•</i><span>JAIPUR POLY CLINIC</span><i>•</i><span>RIHAN STATIONERY</span><i>•</i></div></div>
 <div class="brandlogos" aria-label="Cricket Champions and TPL logos"><div class="logo-flip"><div class="logo-face cc"><img src="cricket-champions-logo.jpg" alt="Cricket Champions"></div><div class="logo-face tpl"><img src="tpl-champions-logo.jpg" alt="TPL Champions"></div></div></div>
 <div class="top">
 <div class="brand"><div class="brandmark">CC</div><div><div class="eyebrow">CRICKET TOURNAMENT</div><div class="title">CRICKET <span>CHAMPIONS</span></div><div class="details">12 September 2026 • Saturday • 8:00 AM • Tiyala, Hapur</div></div></div>
