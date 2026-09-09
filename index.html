@@ -190,13 +190,15 @@ async function removeFromTeam(id){
 async function deletePlayer(id){
  const p=players.find(x=>x.id===id); if(!p||p.is_captain)return;
  if(!confirm(`Delete player "${p.name}"? Ye Team Selection aur Live Score se remove ho jayega.`))return;
- let {data,error}=await db.rpc('delete_player', {p_player_id:id});
+ let {error}=await db.rpc('delete_player', {p_player_id:id});
  if(error){
    const fallback=await db.from('players').delete().eq('id',id);
-   error=fallback.error;
+   if(!fallback.error) error=null;
+   else error=new Error('Supabase delete_player function/RLS setup missing. Pehle MIGRATION_DELETE_PLAYER.sql run karo.\n\n'+fallback.error.message);
  }
- if(error){alert('Player delete nahi hua. Supabase mein DELETE permission/function check karo: '+error.message);return;}
+ if(error){alert('Player delete nahi hua.\n\n'+error.message);return;}
  await loadLiveState();
+ if(admin) renderPlayerManager();
 }
 async function setLock(value){const {error}=await db.from('settings').update({locked:value}).eq('id',1);if(error)alert('Lock status update nahi hua: '+error.message);else await loadLiveState()}
 async function resetLive(){
@@ -258,6 +260,8 @@ function renderPlayerManager(){
   const status=p.is_captain?'Captain':(p.team?'Team '+p.team:'Unselected');
   row.innerHTML=`<div><b>${esc(p.name)}</b><small>${status}</small></div><div class="pm-actions"><button class="btn" data-edit>✏️ Edit</button>${!p.is_captain?'<button class="btn delete-btn" data-delete>🗑 Delete</button>':''}</div>`;
   row.querySelector('[data-edit]').onclick=()=>editPlayer(p.id);
+  const del=row.querySelector('[data-delete]');
+  if(del) del.onclick=()=>deletePlayer(p.id);
   box.appendChild(row);
  });
 } 
