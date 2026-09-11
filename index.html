@@ -125,18 +125,25 @@ function playerCard(p){
  const fixed=!!p.is_captain, team=p.team||null;
  const el=document.createElement('div'); el.className='player';
  el.innerHTML=`<div class="avatar">${esc(initials(p.name))}</div><div class="info"><div class="name">${esc(p.name)}</div><div class="role">${fixed?'Captain':team?('Team '+team):'Not selected'}</div></div>${fixed?'<div class="crown">👑</div>':''}`;
- if(!fixed&&!locked&&!loading){
+ if(!fixed&&!loading){
   const sw=document.createElement('div'); sw.className='switch';
-  ['A','B'].forEach(t=>{
-   const b=document.createElement('button'); b.className='btn'; b.textContent=t;
-   const full=teamCount(t)>=12 && team!==t;
-   b.title=full ? 'Team '+t+' is full — use selected player Swap / Replace' : (t==='A'?"Join Abdur's Champions":"Join Nazim's Champions");
-   b.disabled=(team===t)||full;
-   if(full) b.classList.add('full');
-   b.onclick=()=>chooseTeam(p.id,t); sw.appendChild(b);
-  });
-  if(team && admin){const sb=document.createElement('button');sb.className='btn';sb.textContent='↔ Swap / Replace';sb.title='Selected player ko opposite team ya unselected player se change karo';sb.onclick=()=>openSwap(p.id);sw.appendChild(sb); const rb=document.createElement('button');rb.className='btn remove-btn';rb.textContent='↩ Remove';rb.title='Player ko team se hata kar All Players mein bhejo';rb.onclick=()=>removeFromTeam(p.id);sw.appendChild(rb)}
-  el.appendChild(sw);
+  if(!locked){
+   ['A','B'].forEach(t=>{
+    const b=document.createElement('button'); b.className='btn'; b.textContent=t;
+    const full=teamCount(t)>=12 && team!==t;
+    b.title=full ? 'Team '+t+' is full — use selected player Swap / Replace' : (t==='A'?"Join Abdur's Champions":"Join Nazim's Champions");
+    b.disabled=locked || (team===t)||full;
+    if(full) b.classList.add('full');
+    b.onclick=()=>chooseTeam(p.id,t); sw.appendChild(b);
+   });
+  }
+  // Swap / Replace + Remove stay visible for every selected non-captain.
+  // They are only actionable after Admin PIN; locked teams also disable them.
+  if(team){
+   const sb=document.createElement('button');sb.className='btn';sb.textContent='↔ Swap / Replace';sb.title=(!admin)?'Admin PIN ke baad change kar sakte hain':(locked?'Teams locked hain — pehle Unlock Teams karo':'Selected player ko opposite team ya unselected player se change karo');sb.disabled=!admin || locked;sb.onclick=()=>openSwap(p.id);sw.appendChild(sb);
+   const rb=document.createElement('button');rb.className='btn remove-btn';rb.textContent='↩ Remove';rb.title=(!admin)?'Admin PIN ke baad remove kar sakte hain':(locked?'Teams locked hain — pehle Unlock Teams karo':'Player ko team se hata kar All Players mein bhejo');rb.disabled=!admin || locked;rb.onclick=()=>removeFromTeam(p.id);sw.appendChild(rb);
+  }
+  if(sw.children.length) el.appendChild(sw);
  }
  return el;
 }
@@ -171,6 +178,7 @@ function openSwap(id){
  $('swapBackdrop').dataset.playerId=String(id); $('swapBackdrop').hidden=false;
 }
 async function confirmSwap(){
+ if(!admin || locked){alert('Admin PIN ke baad aur Teams unlocked hone par hi change kar sakte hain.');return;}
  const id=+$('swapBackdrop').dataset.playerId; const p=players.find(x=>x.id===id); const val=$('swapTarget').value; if(!p||!val)return;
  const [mode,targetIdRaw]=val.split(':'); const target=players.find(x=>x.id===+targetIdRaw); if(!target)return;
  if(mode==='same'){alert('Same team ke player se Swap / Replace nahi ho sakta. Opposite team ka player select karo.');return;}
@@ -188,6 +196,7 @@ async function confirmSwap(){
 }
 function closeSwap(){$('swapBackdrop').hidden=true;$('swapBackdrop').dataset.playerId=''}
 async function removeFromTeam(id){
+ if(!admin || locked){alert('Admin PIN ke baad aur Teams unlocked hone par hi remove kar sakte hain.');return;}
  const p=players.find(x=>x.id===id); if(!p||p.is_captain)return;
  if(locked){alert('Teams locked hain. Pehle Unlock Teams karo.');return;}
  if(!confirm(`${p.name} ko Team ${p.team} se remove karke Unselected mein bhejein?`))return;
@@ -275,7 +284,7 @@ function renderPlayerManager(){
 } 
 if($('swapCancel'))$('swapCancel').onclick=closeSwap;if($('swapConfirm'))$('swapConfirm').onclick=confirmSwap;if($('swapBackdrop'))$('swapBackdrop').addEventListener('click',e=>{if(e.target.id==='swapBackdrop')closeSwap()});
 $('print').onclick=()=>window.print();
-$('adminBtn').onclick=()=>{if(admin){$('adminPanel').hidden=true;admin=false;return}const pin=prompt('Enter Admin PIN:');if(pin===ADMIN_PIN){admin=true;$('adminPanel').hidden=false;renderPlayerManager()}else if(pin!==null)alert('Incorrect PIN')};
+$('adminBtn').onclick=()=>{if(admin){$('adminPanel').hidden=true;admin=false;render();return}const pin=prompt('Enter Admin PIN:');if(pin===ADMIN_PIN){admin=true;$('adminPanel').hidden=false;render();renderPlayerManager()}else if(pin!==null)alert('Incorrect PIN')};
 $('lock').onclick=()=>setLock(true);$('unlock').onclick=()=>setLock(false);$('reset').onclick=resetLive;$('restoreBase').onclick=restoreBasePlayers;$('printAdmin').onclick=()=>window.print();$('addPlayer').onclick=addPlayer;$('newPlayerName').addEventListener('keydown',e=>{if(e.key==='Enter')addPlayer()});
 let refreshTimer;function refresh(){clearTimeout(refreshTimer);refreshTimer=setTimeout(()=>loadLiveState().catch(console.error),150)}
 db.channel('cricket-champions-live').on('postgres_changes',{event:'*',schema:'public',table:'players'},refresh).on('postgres_changes',{event:'*',schema:'public',table:'settings'},refresh).subscribe();
